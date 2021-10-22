@@ -1,5 +1,14 @@
-exports.handler = async function(event, context) {
+exports.handler = async function (event, context) {
   const requestBody = JSON.parse(event.body);
+  if (!("message" in requestBody)) {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({
+        message: "Please add a message to your request.",
+      }),
+    };
+  }
+
   const message = requestBody.message;
 
   console.log(event);
